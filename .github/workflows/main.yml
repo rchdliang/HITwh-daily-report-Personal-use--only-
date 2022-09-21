@@ -28,6 +28,6 @@ jobs:
       env:
         WECHAT_OPENID: ${{ secrets.OPENID }}
         USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PW }}
+        PASSWORD: ${{ secrets.PASSWORD }}
         SCHOOL: ${{ secrets.SCHOOL }}
         USER_AGENT: ${{ secrets.UA }}
