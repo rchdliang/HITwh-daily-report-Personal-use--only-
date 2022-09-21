@@ -11,7 +11,6 @@
 import time
 from typing import List
 
-import os
 import requests
 import json
 import base64
