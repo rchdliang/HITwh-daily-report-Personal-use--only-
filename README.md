@@ -4,31 +4,9 @@
 
 感谢 [Cyberenchanter/HITWH-jktb](https://github.com/Cyberenchanter/HITWH-jktb) 的原始脚本
 
+感谢 [Apoois/HITwh-daily-report](https://github.com/Apoois/HITwh-daily-report) 的仓库
 ---
-
-# 疫情无小事，切勿瞒报而破环疫情防治工作
-
-## 本脚本仅为减轻班长和导员的工作压力, 如有不适，请如实手动填写，并及时告知导员！！！
-
-## 本脚本仅为减轻班长和导员的工作压力, 如有不适，请如实手动填写，并及时告知导员！！！
-
-## 本脚本仅为减轻班长和导员的工作压力, 如有不适，请如实手动填写，并及时告知导员！！！
-
-
-
 # 使用方法
-
-**！！注意，由于我放在服务器上，故硬编码了 username 和 password，如果你要使用 github action，请自行修改，如果因此泄漏密码， 本人概不负责！！**
-
-
-
-1. 安装 requirements.txt 中的包
-
-```python
-pip install -r requirements.txt
-```
-
-2. 修改 user.json 中的 `username` `password` `wechatOpenID` `userAgent`
 
 >`username`: 工软校园的用户名， 也是学号
 >
@@ -36,8 +14,4 @@ pip install -r requirements.txt
 >
 >`wechatOpenID`: 通过抓包获取， 你可以使用 Packet Capture (Android) 之类的软件抓取
 >
->`userAgent`: 同上
-
-3. 设置定时任务
-
-   设置定时任务运行 report.py , 方式较多，这里不做赘述
+>`userAgent`: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x6307062c)
