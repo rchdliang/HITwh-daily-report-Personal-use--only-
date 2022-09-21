@@ -6,6 +6,7 @@
 #  https://github.com/Cyberenchanter/HITWH-jktb
 #  2. framework
 #  https://github.com/JalinWang/HITsz-daily-report
+#  3. https://github.com/Apoois/HITwh-daily-report
 #
 import time
 from typing import List
@@ -17,6 +18,14 @@ import ddddocr
 import http.cookiejar as cookielib
 from urllib.parse import urlparse, parse_qs
 
+# ========================================= #
+# 载入action中的信息
+
+    WECHAT_OPENID = os.environ['OPENID']
+    USERNAME = os.environ['USERNAME']
+    PASSWORD = os.environ['PW']
+    SCHOOL = os.environ['SCHOOL']
+    USER_AGENT = os.environ['UA']
 
 # ========================================= #
 # 报错
@@ -55,15 +64,15 @@ class ReportException(Exception):
 # 预处理配置信息
 
 # 用户信息
-with open('./user.json', 'r') as f:
-    user_info = json.load(f)
+# with open('./user.json', 'r') as f:
+#    user_info = json.load(f)
 
 # request url & headers
 with open('requests_path.json', 'r') as f:
     requests_path: dict = json.load(f)
 
-    requests_path["headers"].update({"User-Agent": user_info['userAgent'],
-                                    "Referer": f"http://xy.4009955.com/sfrzwx/auth/login?openid={user_info['wechatOpenID']}&dlfs=zhmm"})  # type: dict
+    requests_path["headers"].update({"User-Agent": USER_AGENT,
+                                    "Referer": f"http://xy.4009955.com/sfrzwx/auth/login?openid={WECHAT_OPENID}&dlfs=zhmm"})  # type: dict
 
 
 # ========================================= #
@@ -101,13 +110,13 @@ class Report:
             verify_code_ans = self.get_verify_code()
             params = {
                 "dlfs": "zhmm",
-                "openid": user_info['wechatOpenID'],
+                "openid": WECHAT_OPENID,
                 "sjschool": "",
                 "sjh": "",
                 "yzm": "",
-                "zhschool": user_info['schoolName'],
-                "username": user_info['username'],
-                "password": user_info['password'],
+                "zhschool": SCHOOL,
+                "username": USERNAME,
+                "password": PASSWORD,
                 "code": verify_code_ans
             }
 
@@ -127,7 +136,7 @@ class Report:
             print("验证码错误， 3s后再尝试")
             time.sleep(3)
         else:
-            raise ReportException.VerifyCodeWrongError("验证码错误过多")
+            raise ReportException.VerifyCodeWrongError("验证码错误过多,寄喽!")
         # 登录成功， 跳转并更新 cookie
         headers: dict = requests_path["headers"]
         headers.update({"X-Requested-With": "XMLHttpRequest"})
