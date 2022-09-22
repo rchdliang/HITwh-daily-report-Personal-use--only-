@@ -8,18 +8,18 @@ on:
     - cron: "16 22 ? * *"
   workflow_dispatch:
 env:
-        WECHAT_OPENID: ${{ secrets.OPENID }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PASSWORD }}
-        SCHOOL: ${{ secrets.SCHOOL }}
-        USER_AGENT: ${{ secrets.UA }}
+  WECHAT_OPENID: ${{ secrets.OPENID }}
+  USERNAME: ${{ secrets.USERNAME }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  SCHOOL: ${{ secrets.SCHOOL }}
+  USER_AGENT: ${{ secrets.UA }}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "run"
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
@@ -30,4 +30,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: run main function
       run: 
-        python ./report.py
+        python report.py
