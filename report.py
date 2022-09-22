@@ -27,11 +27,11 @@ USERNAME = os.environ.get('USERNAME')
 PASSWORD = os.environ.get('PW')
 SCHOOL = os.environ.get('SCHOOL')
 USER_AGENT = os.environ.get('UA')
-WECHAT_OPENID = os.environ['OPENID']
-USERNAME = os.environ['USERNAME']
-PASSWORD = os.environ['PW']
-SCHOOL = os.environ['SCHOOL']
-USER_AGENT = os.environ['UA']
+WECHAT_OPENID = os.environ["OPENID"]
+USERNAME = os.environ["USERNAME"]
+PASSWORD = os.environ["PW"]
+SCHOOL = os.environ["SCHOOL"]
+USER_AGENT = os.environ["UA"]
 
 # ========================================= #
 # 报错
@@ -77,7 +77,7 @@ class ReportException(Exception):
 with open('requests_path.json', 'r') as f:
     requests_path: dict = json.load(f)
 
-    requests_path["headers"].update({"User-Agent": USER_AGENT,
+    requests_path["headers"].update({"User-Agent": 'USER_AGENT',
                                     "Referer": f"http://xy.4009955.com/sfrzwx/auth/login?openid={WECHAT_OPENID}&dlfs=zhmm"})  # type: dict
 
 
