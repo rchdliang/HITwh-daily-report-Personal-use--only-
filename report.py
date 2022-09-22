@@ -110,7 +110,7 @@ class Report:
         headers: dict = requests_path["headers"]
         headers.update({"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"})
 
-        for cnt in range(5):
+        for cnt in range(10):
             verify_code_ans = self.get_verify_code()
             params = {
                 "dlfs": "zhmm",
@@ -137,6 +137,7 @@ class Report:
             if next_url_parse.path != "/sfrzwx/auth/login":
                 break
 
+            print("验证码为"verify_code_ans)
             print("验证码错误， 3s后再尝试")
             time.sleep(3)
         else:
