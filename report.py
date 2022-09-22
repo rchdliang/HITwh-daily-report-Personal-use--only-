@@ -309,39 +309,40 @@ def main():
         a.login()
     except ReportException.GetVerifyCodeError as e:
         print(e)
-        return
+        return 1000
     except ReportException.LoginError as e:
         print(e)
-        return
+        return 2000
 
     try:
         a.get_wechat_code()
     except ReportException.GetWeChatCodeError as e:
         print(e)
-        return
+        return 3000
 
     try:
         a.check_wechat_oauth()
     except ReportException.OAuth2Error as e:
         print(e)
-        return
+        return 4000
 
     try:
         a.check_report()
     except ReportException.GetFormsError as e:
         print(e)
-        return
+        return 5000
     except ReportException.ReportExistError as e:
         print(e)
-        return
+        return 6000
     except ReportException.TableError as e:
         print(e)
-        return
+        return 7000
 
     try:
         a.submit_report()
     except ReportException.SubmitError as e:
         print(e)
+        return 8000
 
 
 if __name__ == '__main__':
