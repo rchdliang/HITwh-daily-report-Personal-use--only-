@@ -27,6 +27,11 @@ USERNAME = os.environ.get('USERNAME')
 PASSWORD = os.environ.get('PW')
 SCHOOL = os.environ.get('SCHOOL')
 USER_AGENT = os.environ.get('UA')
+WECHAT_OPENID = os.environ['OPENID']
+USERNAME = os.environ.['USERNAME']
+PASSWORD = os.environ.['PW']
+SCHOOL = os.environ.['SCHOOL']
+USER_AGENT = os.environ.['UA']
 
 # ========================================= #
 # 报错
