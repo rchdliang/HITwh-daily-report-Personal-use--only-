@@ -97,7 +97,8 @@ class Report:
            print(response.status_code)
            print(url)
            print(headers)
-           raise ReportException.GetVerifyCodeError("获取验证码失败")
+           print("获取验证码失败")
+           raise ReportException.GetVerifyCodeError()
 
         body = response.json()
         verify_code: str = body["data"]["content"]
@@ -130,7 +131,8 @@ class Report:
 
             if response.status_code != 302:
                 print(status_code)
-                raise ReportException.LoginError("登录错误")
+                print("登录错误")
+                raise ReportException.LoginError()
 
             next_url = response.next.url
             next_url_parse = urlparse(next_url)
@@ -143,7 +145,8 @@ class Report:
             print("验证码错误， 3s后再尝试")
             time.sleep(3)
         else:
-            raise ReportException.VerifyCodeWrongError("验证码错误过多,寄喽!")
+            print("验证码错误过多,寄喽!")
+            raise ReportException.VerifyCodeWrongError()
         # 登录成功， 跳转并更新 cookie
         headers: dict = requests_path["headers"]
         headers.update({"X-Requested-With": "XMLHttpRequest"})
@@ -161,7 +164,8 @@ class Report:
         response = self.mysession.get(url, headers=headers, verify=False, allow_redirects=False)
 
         if response.status_code != 302:
-            raise ReportException.GetWeChatCodeError("获取WeChat Code错误")
+            print("获取WeChat Code错误")
+            raise ReportException.GetWeChatCodeError()
 
         # print(f'GET {url} {response.status_code}')
         next_url = response.next.url
@@ -180,7 +184,8 @@ class Report:
         response = self.mysession.post(url, json=data, headers=headers, verify=False, timeout=5, allow_redirects=False)
 
         if response.status_code != 200:
-            raise ReportException.OAuth2Error("微信鉴权错误")
+            print("微信鉴权错误")
+            raise ReportException.OAuth2Error()
         print("WeChat OAuth2 通过")
 
     def check_report(self):
@@ -192,7 +197,8 @@ class Report:
         response = self.mysession.post(url, headers=headers, verify=False, timeout=5, allow_redirects=False)
 
         if response.status_code != 200:
-            raise ReportException.GetFormsError("获取今日表单id及状态错误")
+            print("获取今日表单id及状态错误")
+            raise ReportException.GetFormsError()
 
         today_form = response.json()
 
@@ -201,7 +207,8 @@ class Report:
 
         # 判断是否填写过
         if is_reported == 1:
-            raise ReportException.ReportExistError("已填报，无需再次填写")
+            print("已填报，无需再次填写")
+            raise ReportException.ReportExistError()
 
         # 获取历史表单id和日期
         url = requests_path["url"]["historyForms"]
@@ -215,7 +222,8 @@ class Report:
 
         response = self.mysession.post(url, json=page_data, headers=headers, verify=False, allow_redirects=False)
         if response.status_code != 200:
-            raise ReportException.GetFormsError("获取昨日表单id错误")
+            print("获取昨日表单id错误")
+            raise ReportException.GetFormsError()
 
         history_form = response.json()
         yesterday_form_id = history_form["data"]["content"][0]["bdtbslid"]
@@ -232,7 +240,8 @@ class Report:
         response = self.mysession.post(url, json=today_data, headers=headers, verify=False, allow_redirects=False)
 
         if response.status_code != 200:
-            raise ReportException.GetFormsError("获取今日表单内容错误")
+            print("获取今日表单内容错误")
+            raise ReportException.GetFormsError()
 
         today_form_content = response.json()["data"]["content"]
         today_form_list: List[dict] = today_form_content["list"]
@@ -250,7 +259,8 @@ class Report:
         response = self.mysession.post(url, json=yesterday_data, headers=headers, verify=False, allow_redirects=False)
 
         if response.status_code != 200:
-            raise ReportException.GetFormsError("获取昨日表单内容错误")
+            print("获取昨日表单内容错误")
+            raise ReportException.GetFormsError()
 
         yesterday_form_list: List[dict] = response.json()["data"]["content"]["list"]
 
@@ -265,7 +275,8 @@ class Report:
                     is_same = 0
                     break
         if is_same == 0:
-            raise ReportException.TableError("表单出现更改，请手动填写，并更改设置内容")
+            print("表单出现更改，请手动填写，并更改设置内容")
+            raise ReportException.TableError()
 
         print("表单校验无误")
 
@@ -293,74 +304,24 @@ class Report:
         response = self.mysession.post(url, json=submit_data, headers=headers, verify=False, allow_redirects=False)
 
         if response.status_code != 200:
-            raise ReportException.SubmitError("提交失败")
+            print("提交失败")
+            raise ReportException.SubmitError()
         print("填报完成")
 
 
 def main():
     print("")
     print("==========================")
-    print("#   HITwh 每日健康填报     #")
+    print("#   HITwh 每日健康填报    #")
     print("==========================")
 
     a = Report()
-
-    try:
-        a.login()
-    except ReportException.GetVerifyCodeError as e:
-        print(e)
-        return 1000
-    except ReportException.LoginError as e:
-        print(e)
-        return 2000
-
-    try:
-        a.get_wechat_code()
-    except ReportException.GetWeChatCodeError as e:
-        print(e)
-        return 3000
-
-    try:
-        a.check_wechat_oauth()
-    except ReportException.OAuth2Error as e:
-        print(e)
-        return 4000
-
-    try:
-        a.check_report()
-    except ReportException.GetFormsError as e:
-        print(e)
-        return 5000
-    except ReportException.ReportExistError as e:
-        print(e)
-        return 6000
-    except ReportException.TableError as e:
-        print(e)
-        return 7000
-
-    try:
-        a.submit_report()
-    except ReportException.SubmitError as e:
-        print(e)
-        return 8000
-
+    a.login()
+    a.get_wechat_code()
+    a.check_wechat_oauth()
+    a.check_report()
+    a.submit_report()
+    return
 
 if __name__ == '__main__':
-    try:
-        main()
-    except ReportException.GetVerifyCodeError as e:
-        print(e)
-    except ReportException.LoginError as e:
-        print(e)
-    except ReportException.GetWeChatCodeError as e:
-        print(e)
-    except ReportException.OAuth2Error as e:
-        print(e)
-    except ReportException.GetFormsError as e:
-        print(e)
-    except ReportException.ReportExistError as e:
-        print(e)
-    except ReportException.TableError as e:
-        print(e)
-    except ReportException.SubmitError as e:
-        print(e)
+    main()
