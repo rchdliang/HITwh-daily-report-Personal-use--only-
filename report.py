@@ -129,15 +129,17 @@ class Report:
                                            allow_redirects=False)
 
             if response.status_code != 302:
+                print(status_code)
                 raise ReportException.LoginError("登录错误")
 
             next_url = response.next.url
             next_url_parse = urlparse(next_url)
 
             if next_url_parse.path != "/sfrzwx/auth/login":
+                print(next_url_parse.path)
                 break
 
-            print(verify_code_ans)
+            print(params)
             print("验证码错误， 3s后再尝试")
             time.sleep(3)
         else:
