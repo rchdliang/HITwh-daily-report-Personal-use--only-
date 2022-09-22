@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: "16 22 ? * *"
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
