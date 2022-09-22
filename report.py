@@ -24,7 +24,7 @@ from urllib.parse import urlparse, parse_qs
 
 WECHAT_OPENID = os.getenv("OPENID")
 USERNAME = os.getenv("USERNAME")
-PASSWORD = os.getenv("PW")
+PASSWORD = os.getenv("PASSWORD")
 SCHOOL = os.getenv("SCHOOL")
 USER_AGENT = os.getenv("UA")
 
