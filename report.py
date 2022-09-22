@@ -94,6 +94,7 @@ class Report:
         response = self.mysession.post(url, headers=headers, verify=False, timeout=5)
 
         if response.status_code != 200:
+            print(response.status_code)
             raise ReportException.GetVerifyCodeError("获取验证码失败")
 
         body = response.json()
