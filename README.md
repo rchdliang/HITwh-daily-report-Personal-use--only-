@@ -8,6 +8,7 @@
 
 ---
 # 使用方法
+fork之后设置secret
 
 >`username`: 工软校园的用户名， 也是学号
 >
@@ -15,8 +16,11 @@
 >
 >`wechatOpenID`: 手机微信的工软校园-应用中心-我的-设置-解除绑定 之后,在登录页面复制链接,里面有这个东西
 >
->`userAgent`: (我自己的电脑版微信)Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x6307062c)
+>`userAgent`: 微信内置浏览器打开 http://service.spiritsoft.cn/ua.html
 
-Fork之后把secrets填上就能用(应该)
-不知道这玩意能不能跑起来(心虚)
+记得检查填报信息，按照自己的情况修改
+
+# 本代码于2022.9.22首次调试成功并填报
+
 以后有机会搞个推送(也许)
+
