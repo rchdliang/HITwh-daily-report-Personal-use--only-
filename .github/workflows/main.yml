@@ -7,12 +7,12 @@ on:
   schedule:
     - cron: "16 22 ? * *"
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true 
-
+env:
+        WECHAT_OPENID: ${{ secrets.OPENID }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        SCHOOL: ${{ secrets.SCHOOL }}
+        USER_AGENT: ${{ secrets.UA }}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "run"
@@ -29,11 +29,5 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: run main function
-      env:
-        WECHAT_OPENID: ${{ secrets.OPENID }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PASSWORD }}
-        SCHOOL: ${{ secrets.SCHOOL }}
-        USER_AGENT: ${{ secrets.UA }}
       run: 
         python ./report.py
