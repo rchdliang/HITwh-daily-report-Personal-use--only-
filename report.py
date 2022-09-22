@@ -137,7 +137,7 @@ class Report:
             if next_url_parse.path != "/sfrzwx/auth/login":
                 break
 
-            print("验证码为"verify_code_ans)
+            print(verify_code_ans)
             print("验证码错误， 3s后再尝试")
             time.sleep(3)
         else:
