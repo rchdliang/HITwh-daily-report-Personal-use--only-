@@ -22,7 +22,7 @@ from urllib.parse import urlparse, parse_qs
 # ========================================= #
 # 载入action中的信息
 
-WECHAT_OPENID = os.environ['OPENID']
+WECHAT_OPENID = os.environ.get('OPENID')
 USERNAME = os.environ['USERNAME']
 PASSWORD = os.environ['PW']
 SCHOOL = os.environ['SCHOOL']
