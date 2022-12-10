@@ -13,7 +13,7 @@
                 }
             ],
             "value": [
-                "c001"
+                "c002"
             ]
         },
         {
@@ -21,15 +21,15 @@
             "list": [
                 {
                     "column": "gSheng",
-                    "content": "山东省"
+                    "content": "吉林省"
                 },
                 {
                     "column": "gShi",
-                    "content": "威海市"
+                    "content": "长春市"
                 },
                 {
                     "column": "gQu",
-                    "content": "环翠区"
+                    "content": "朝阳区"
                 }
             ],
             "value": ""
@@ -189,7 +189,7 @@
                 }
             ],
             "value": [
-                "c022"
+                "c021"
             ]
         },
         {
@@ -200,7 +200,7 @@
                     "content": ""
                 }
             ],
-            "value": ""
+            "value": "于校内坐大巴车到威海大水泊机场乘坐MU6895航班前往吉林长春"
         },
         {
             "zjlx": 3,
